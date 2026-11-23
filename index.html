@@ -10,6 +10,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Bom de Tela">
+<script>window.SOLO=1</script>
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}</style>
 <title>Bom de Tela</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -392,9 +393,15 @@ function verdict(f){
 const vchip=f=>{const v=f._v||(f._v=verdict(f));return `<span class="vd v${v.k}">${v.lab}</span>`};
 
 /* ---------- cartazes (folhas 10x10) ---------- */
-function spr(f){return `background-image:url('capas/${String(f.i/100|0).padStart(2,'0')}.jpg');background-size:1000% 1000%;background-position:${(f.i%10)/9*100}% ${((f.i%100)/10|0)/9*100}%`}
+/* versao publicada (window.SOLO): uma capa pequena por arquivo, carregada so quando aparece na tela.
+   As folhas 10x10 decodificadas passam de 600 MB e derrubam o navegador do iPhone. */
+const SOLO=!!window.SOLO;
+const LZ=SOLO&&'IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const t=e.target;t.style.backgroundImage=`url('${t.dataset.cv}')`;LZ.unobserve(t)}}),{rootMargin:'300px'}):null;
+if(SOLO)new MutationObserver(()=>{document.querySelectorAll('[data-cv]:not([data-o])').forEach(el=>{el.dataset.o=1;LZ?LZ.observe(el):el.style.backgroundImage=`url('${el.dataset.cv}')`})}).observe(document.documentElement,{childList:true,subtree:true});
+function cvAttr(f){return SOLO?`data-cv="c/${f.id}.jpg" style="background-size:cover;background-position:center"`:`style="${spr(f)}"`}
+function spr(f){if(SOLO)return `background-image:url('c/${f.id}.jpg');background-size:cover;background-position:center`;return `background-image:url('capas/${String(f.i/100|0).padStart(2,'0')}.jpg');background-size:1000% 1000%;background-position:${(f.i%10)/9*100}% ${((f.i%100)/10|0)/9*100}%`}
 function poster(f,opts){const v=f._v||(f._v=verdict(f));opts=opts||{};
- return `<div class="pst"><i class="spr" role="img" aria-label="Cartaz de ${esc(f.t)}" style="${spr(f)}"></i>`+
+ return `<div class="pst"><i class="spr" role="img" aria-label="Cartaz de ${esc(f.t)}" ${cvAttr(f)}></i>`+
  (opts.noScore?'':`<span class="sc" style="--vc:var(--v${v.k})"><i></i>${fmt1(f.w)}</span>`)+
  `<span class="aw">${f.os?`<span title="${f.os} Oscar(s)">OSCAR${f.os>1?' '+f.os:''}</span>`:''}${f.pa?'<span class="p" title="Palma de Ouro">PALMA</span>':''}</span></div>`}
 const card=(f,rk)=>`<button class="card" type="button" data-f="${f.i}">${rk?`<span class="rk">${rk}</span>`:''}${poster(f)}<div class="ti">${esc(f.t)}</div><div class="me">${f.y} · ${esc(GPT[f.gs[0]]||f.gs[0])}</div></button>`;
