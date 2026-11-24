@@ -10,7 +10,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Bom de Tela">
-<script>window.SOLO=1;window.SEM=(new URLSearchParams(location.search).get("sem")||"");document.documentElement.classList.add("sem-anim");/* animacoes CSS derrubavam o iOS 26 (teste 23/11) */window.SEM.split(",").forEach(function(k){if(k)document.documentElement.classList.add("sem-"+k)});try{history.replaceState(null,"",location.pathname+"?"+(window.SEM?"sem="+window.SEM+"&":"")+"e=head"+location.hash)}catch(e){}</script>
+<script>window.SOLO=1;window.E0=(new URLSearchParams(location.search).get("e")||"");window.SEM=(new URLSearchParams(location.search).get("sem")||"");document.documentElement.classList.add("sem-anim");/* animacoes CSS derrubavam o iOS 26 (teste 23/11) */window.SEM.split(",").forEach(function(k){if(k)document.documentElement.classList.add("sem-"+k)});try{history.replaceState(null,"",location.pathname+"?"+(window.SEM?"sem="+window.SEM+"&":"")+"e=head"+location.hash)}catch(e){}</script>
 <style>.sem-blur *,.sem-blur *::before,.sem-blur *::after{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;filter:none!important}.sem-anim *,.sem-anim *::before,.sem-anim *::after{animation:none!important;transition:none!important}.sem-img .hero-bg,.sem-img .bgi,.sem-img .spr{background-image:none!important}</style>
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}</style>
 <title>Bom de Tela</title>
@@ -46,6 +46,7 @@ h1,h2,h3{text-wrap:balance;font-weight:600}
 /* abertura */
 #splash{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:var(--bg);transition:opacity .5s,visibility .5s}
 #splash.out{opacity:0;visibility:hidden}
+#intro{position:fixed;inset:0;z-index:120;background:#050304}#intro video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}#intro button{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));padding:10px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.45);color:#fff;font:600 14px var(--f-ui,system-ui)}
 .sp-in{display:grid;justify-items:center;gap:14px}
 .sp-logo{font:400 44px/1 var(--f-disp);letter-spacing:-.01em}
 .sp-logo b{font-style:italic;font-weight:400;color:var(--ac)}
@@ -320,6 +321,7 @@ main{padding-bottom:calc(var(--tabh) + 30px + env(safe-area-inset-bottom,0px))}
  <section class="view" id="v-ajustes"><div class="wrap">
   <div class="ph"><div class="kick">Do seu jeito</div><h1>Ajustes</h1></div>
   <div class="box"><h3>Meus streamings</h3><p>Marque os serviços que você assina. O app mostra primeiro o que você pode ver sem pagar a mais, e o sorteio pode usar só esses.</p><div class="wrapchips" id="mysv"></div></div>
+  <div class="box"><h3>Movimento</h3><p id="fxmsg">Prateleiras que surgem, cartaz que inclina ao tocar e destaque com profundidade. Se o celular travar, desligue aqui.</p><button class="tg" type="button" id="tfx" aria-pressed="true"><span>Animações<small>Feitas para não pesar no iPhone</small></span><span class="sw"></span></button></div>
   <div class="box"><h3>Instalar no celular</h3><p>No iPhone: abra no Safari, toque em Compartilhar e depois em "Adicionar à Tela de Início". No Android: abra no Chrome, toque nos três pontos e em "Instalar app".</p></div>
   <div class="box"><h3>Sobre os dados</h3><p id="about"></p><p class="credit">Cartazes, sinopses, elenco e onde assistir vêm da API do TMDB. Este app usa a API do TMDB, mas não é endossado nem certificado pelo TMDB. Notas do público: IMDb. Crítica: Rotten Tomatoes e Metacritic via Wikidata.</p><a class="tmdb" href="https://www.themoviedb.org/" target="_blank" rel="noopener">TMDB</a></div>
  </div></section>
@@ -445,7 +447,7 @@ function showHero(j){heroI=j;const h=HERO[j],f=h.f,bg=$('#hbg');if(!bg)return;
  if(f.bd){bg.className='hero-bg';bg.style.cssText=`background-image:url('fundos/${f.id}.jpg')`}else{bg.className='hero-bg blur';bg.style.cssText=spr(f)}
  $('#hc').innerHTML=`<div class="kick">${h.k}</div><h1>${esc(f.t)}</h1><div class="meta">${vchip(f)}<span class="num">${f.y}</span>${f.min?`<span>${hm(f.min)}</span>`:''}${f.cert?`<span class="cert c-${f.cert}">${f.cert}</span>`:''}<span>${f.gs.slice(0,3).map(g=>GPT[g]).join(' · ')}</span></div>
  ${f.tl?`<p class="tl">${esc(f.tl)}</p>`:''}<div class="btns"><button class="btn pri" type="button" data-f="${f.i}">${ICO.info}Ver orientação</button><button class="btn sec" type="button" data-wl="${f.id}">${WL.has(f.id)?ICO.ok+'Na lista':ICO.plus+'Minha lista'}</button></div>`;
- $$('#hdots button').forEach((b,k)=>b.classList.toggle('on',k===j))}
+ $$('#hdots button').forEach((b,k)=>b.classList.toggle('on',k===j));FX.hero()}
 
 /* ---------- buscar ---------- */
 const QS={g:'',fam:0,y1:0,y2:0,aw:''};
@@ -488,7 +490,7 @@ function openF(f,noHash){sheetF=f;const v=f._v||(f._v=verdict(f));
   ${f.d.length||f.c.length?`<div class="blk"><h4>Quem faz</h4>${f.d.length?`<p class="people"><span>Direção:</span> ${f.d.map(esc).join(', ')}</p>`:''}${f.c.length?`<p class="people"><span>Elenco:</span> ${f.c.map(esc).join(', ')}</p>`:''}</div>`:''}
   <div class="blk"><h4>Se gostou, veja também</h4><div class="rail">${similar(f).map(g=>card(g)).join('')}</div></div>
  </div></div>`;
- $('#sheet').classList.add('on');$('#shc').scrollTop=0;document.body.style.overflow='hidden';
+ $('#sheet').classList.add('on');$('#shc').scrollTop=0;FX.sheet();document.body.style.overflow='hidden';
  if(!noHash&&location.hash!=='#filme-'+f.id)history.pushState(null,'','#filme-'+f.id)}
 function closeF(){if(!$('#sheet').classList.contains('on'))return;$('#sheet').classList.remove('on');document.body.style.overflow='';sheetF=null;
  if(location.hash.startsWith('#filme-'))history.replaceState(null,'','#'+cur)}
@@ -540,7 +542,8 @@ let LT='quero';
 function rLista(){const set=LT==='quero'?WL:SEEN,l=[...set].map(id=>byId.get(id)).filter(Boolean).reverse();
  $$('.seg button').forEach(b=>b.classList.toggle('on',b.dataset.l===LT));
  $('#lres').innerHTML=l.length?`<div class="grid">${l.map(f=>card(f)).join('')}</div>`:`<div class="empty">${LT==='quero'?'Sua lista está vazia. Toque em "Minha lista" na ficha de um filme para guardar.':'Nenhum filme marcado como visto ainda.'}</div>`}
-function rAjustes(){const c={};F.forEach(f=>f.wv.forEach(w=>{if(w[1]<2)c[w[0]]=(c[w[0]]||0)+1}));
+function rFx(){const b=$('#tfx');if(!b)return;b.setAttribute('aria-pressed',FX.on);if(FX.auto()&&!FX.on)$('#fxmsg').textContent='Desligado sozinho porque o app travou na última abertura. Ligue de novo se quiser testar.'}
+function rAjustes(){rFx();const c={};F.forEach(f=>f.wv.forEach(w=>{if(w[1]<2)c[w[0]]=(c[w[0]]||0)+1}));
  const top=Object.entries(c).filter(e=>e[1]>=20&&!/with Ads|Channel|Standard|Amazon Channel/i.test(PV[e[0]]||'')).sort((a,b)=>b[1]-a[1]).slice(0,22);
  $('#mysv').innerHTML=top.map(e=>`<button type="button" class="chip${MYSV.has(e[0])?' on':''}" data-sv="${e[0]}">${esc(PV[e[0]])} <span class="num" style="opacity:.6">${e[1]}</span></button>`).join('');
  $('#about').textContent=`${F.length.toLocaleString('pt-BR')} filmes de 1980 a 2026, os mais bem avaliados de cada gênero e ano. Atualizado em ${D.upd}. A nota Bom de Tela junta a nota do público, o número de votos, a crítica e os prêmios.`}
@@ -574,6 +577,7 @@ document.addEventListener('click',e=>{const t=e.target;
  const aw=t.closest('[data-aw]');if(aw){DF.aw=aw.dataset.aw;rFilters();return}
  const mn=t.closest('[data-mn]');if(mn){DF.min=+mn.dataset.mn;rFilters();return}
  const du=t.closest('[data-du]');if(du){DF.dur=+du.dataset.du;rFilters();return}
+ if(t.closest('#tfx')){FX.set(!FX.on);rFx();return}
  const tgb=t.closest('.tg');if(tgb){const k={tfam:'fam',tmine:'mine',tunseen:'unseen'}[tgb.id];DF[k]=!DF[k];tgb.setAttribute('aria-pressed',DF[k]);updPot();return}
  if(t.closest('#dreset')){DF=Object.assign({},DEF);rFilters();return}
  if(t.closest('#drawbtn')||t.closest('[data-redraw]')){if(t.closest('[data-redraw]'))$('#reel').scrollIntoView({behavior:'smooth',block:'center'});draw();return}
@@ -590,10 +594,62 @@ addEventListener('hashchange',route);addEventListener('scroll',topSolid,{passive
 (function(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return;const b=$('#mic');b.hidden=false;
  b.addEventListener('click',()=>{try{const r=new SR();r.lang='pt-BR';r.interimResults=false;r.onresult=ev=>{$('#q').value=ev.results[0][0].transcript;search()};r.onerror=()=>{b.hidden=true;toast('A busca por voz não está disponível aqui')};r.start();toast('Pode falar o nome do filme')}catch(err){b.hidden=true}})})();
 
+/* ---------- movimento seguro (23/11) ----------
+   O iOS 26 derrubava a pagina com animacoes/transicoes CSS (a tela inteira animada).
+   Aqui todo movimento e feito por codigo (requestAnimationFrame), so em pecas pequenas
+   (prateleira, cartaz, destaque, ficha) e nunca na pagina inteira.
+   Rede de seguranca: se a abertura anterior caiu (endereco com ?e= de etapa antes de "estavel"),
+   o movimento desliga sozinho; o usuario pode religar em Ajustes. */
+const FX=(()=>{
+ const q=typeof window.E0==='string'?window.E0:'';
+ if(q&&!/^estavel/.test(q))store.set('fxAuto',1);
+ let on=store.get('fx',1)!==0&&!store.get('fxAuto',0)&&!(window.SEM||'').includes('fx')&&!matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const ease=t=>1-Math.pow(1-t,3);
+ function tw(el,ms,fn,done){const t0=performance.now();const f=n=>{const k=Math.min(1,(n-t0)/ms);fn(ease(k));k<1?requestAnimationFrame(f):(done&&done())};requestAnimationFrame(f)}
+ /* prateleiras surgem ao entrar na tela */
+ const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;io.unobserve(el);
+   tw(el,520,k=>{el.style.opacity=k;el.style.transform=k<1?`translateY(${(1-k)*18}px)`:''})}),{rootMargin:'0px 0px -8% 0px'}):null;
+ function scan(root){if(!on||!io)return;(root||document).querySelectorAll('.shelf:not([data-fx]),.box:not([data-fx]),.res-grid>*:not([data-fx])').forEach(el=>{el.dataset.fx=1;
+   const r=el.getBoundingClientRect();if(r.top<innerHeight*.92&&r.bottom>0)return;el.style.opacity=0;io.observe(el)})}
+ new MutationObserver(()=>{if(on)requestAnimationFrame(()=>scan())}).observe(document.querySelector('main')||document.body,{childList:true,subtree:true});
+ /* destaque: profundidade ao rolar (so a imagem do topo) */
+ let tick=0;addEventListener('scroll',()=>{if(!on||tick)return;tick=requestAnimationFrame(()=>{tick=0;const bg=document.getElementById('hbg');if(!bg||cur!=='inicio')return;
+   const y=scrollY;if(y<innerHeight)bg.style.transform=bg.classList.contains('blur')?'':`translateY(${(y*.3).toFixed(1)}px) scale(1.06)`})},{passive:true});
+ /* troca do destaque: texto aparece suave */
+ function hero(){if(!on)return;const c=document.getElementById('hc'),bg=document.getElementById('hbg');if(!c)return;
+   tw(c,600,k=>{c.style.opacity=k;c.style.transform=k<1?`translateY(${(1-k)*12}px)`:''});if(bg)tw(bg,700,k=>{bg.style.opacity=bg.classList.contains('blur')?.55*k:k})}
+ /* ficha do filme sobe */
+ function sheet(){if(!on)return;const sh=document.getElementById('shc');if(!sh)return;tw(sh,300,k=>{sh.style.transform=k<1?`translateY(${((1-k)*100).toFixed(1)}%)`:''})}
+ /* cartaz inclina ao tocar (so o cartaz tocado) */
+ let tl=null;
+ addEventListener('pointerdown',e=>{if(!on)return;const p=e.target.closest&&e.target.closest('.pst');if(!p||p.closest('.strip'))return;tl=p;
+   const r=p.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+   p.style.transform=`perspective(700px) rotateY(${(x*14).toFixed(1)}deg) rotateX(${(-y*14).toFixed(1)}deg) scale(.97)`},{passive:true});
+ const solta=()=>{if(!tl)return;const p=tl;tl=null;const m=p.style.transform;tw(p,260,k=>{p.style.transform=k<1?m.replace(/rotateY\(([-\d.]+)deg\) rotateX\(([-\d.]+)deg\) scale\(\.97\)/,(a,ry,rx)=>`rotateY(${(ry*(1-k)).toFixed(1)}deg) rotateX(${(rx*(1-k)).toFixed(1)}deg) scale(${(.97+.03*k).toFixed(3)})`):''})};
+ addEventListener('pointerup',solta,{passive:true});addEventListener('pointercancel',solta,{passive:true});
+ function set(v){on=!!v;store.set('fx',on?1:0);if(on)store.set('fxAuto',0);if(!on)document.querySelectorAll('[data-fx]').forEach(el=>{el.style.opacity='';el.style.transform=''})}
+ return {get on(){return on},auto:()=>!!store.get('fxAuto',0),scan,hero,sheet,set,tw};
+})();
+
+/* ---------- abertura em video (24/11) ----------
+   A abertura 3D (Fogo de Estreia) foi gravada como video curto (abertura.mp4, 9 s):
+   roda liso em qualquer celular, sem o peso do 3D. Uma vez por dia; botao Pular. */
+function intro(){
+ const hoje=new Date().toISOString().slice(0,10);
+ if(!window.SOLO||!FX.on||store.get('introDia','')===hoje)return;
+ const d=document.createElement('div');d.id='intro';
+ d.innerHTML='<video src="abertura.mp4" poster="abertura.jpg" muted playsinline autoplay preload="auto"></video><button type="button">Pular abertura ›</button>';
+ document.body.appendChild(d);const v=d.querySelector('video');let fim=false;
+ const sai=()=>{if(fim)return;fim=true;store.set('introDia',hoje);FX.tw(d,450,k=>{d.style.opacity=1-k},()=>{try{v.pause();v.removeAttribute('src');v.load()}catch(e){}d.remove()})};
+ v.addEventListener('ended',sai);v.addEventListener('error',sai);d.querySelector('button').addEventListener('click',sai);
+ setTimeout(sai,12000);
+ const pl=v.play();if(pl&&pl.catch)pl.catch(sai);
+}
+
 /* ---------- carregar ---------- */
 (async function(){
  try{$('#logo').src='icone-192.png'}catch(e){}
- DG('baixando');try{const r=await fetch('dados.json');D=await r.json()}catch(e){$('#spmsg').textContent='Não consegui abrir o catálogo. Confira a conexão e abra de novo.';return}
+ try{intro()}catch(e){}DG('baixando');try{const r=await fetch('dados.json');D=await r.json()}catch(e){$('#spmsg').textContent='Não consegui abrir o catálogo. Confira a conexão e abra de novo.';return}
  DG('dados ok');G=D.g;PV=D.pv;
  F=D.f.map((a,i)=>({i,id:'tt'+String(a[0]).padStart(7,'0'),t:a[1],o:a[2],y:a[3],min:a[4],gs:G.filter((g,k)=>a[5]&(1<<k)),r:a[6]/10,v:a[7],rt:a[8],mc:a[9],os:a[10],pa:a[11],sin:a[12],en:a[13],w:a[14]/1000,wv:a[15]||[],d:a[16]||[],c:a[17]||[],cert:a[18]||'',tl:a[19]||'',tr:a[20]||'',pop:a[21]||0,bd:!!a[22]}));
  F.forEach(f=>{byId.set(f.id,f);f._t=norm(f.t);f._s=norm(f.t+' '+f.o+' '+f.d.join(' ')+' '+f.c.join(' ')+' '+f.y)});
