@@ -2,4 +2,4 @@
 // Este arquivo so remove a versao antiga que ficou instalada nos aparelhos.
 self.addEventListener('install',()=>self.skipWaiting());
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.map(k=>caches.delete(k)))).then(()=>self.registration.unregister()))});
-// 202611232141
+// 202611232200

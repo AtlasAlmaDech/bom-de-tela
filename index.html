@@ -424,6 +424,7 @@ function rInicio(){
  const short=F.filter(f=>f.min&&f.min<=100&&f.w>=7).sort(byPop).slice(0,24);
  const mine=MYSV.size?F.filter(onMine).sort(byPop).slice(0,24):[];
  const wl=F.filter(f=>WL.has(f.id)).slice(0,24);
+ const nv=((D&&D.nv)||[]).map(x=>byId.get(x)).filter(Boolean).slice(0,30);
  const gsh=['Action','Comedy','Horror','Sci-Fi','Romance','Thriller','Animation','Crime'].map(g=>shelf(GPT[g],'',F.filter(f=>f.gs.includes(g)).sort(byPop).slice(0,24),'',{g:[g]})).join('');
  const decs=[1980,1990,2000].map(d=>shelf('Anos '+String(d).slice(2),'Os melhores da década',F.filter(f=>f.y>=d&&f.y<d+10).sort(byW).slice(0,24),'',{y1:d,y2:d+9})).join('');
  $('#v-inicio').innerHTML=`<div class="hero" id="hero"><div class="hero-bg" id="hbg"></div><div class="wrap" style="width:100%"><div class="hero-c" id="hc"></div><div class="dots" id="hdots">${HERO.map((h,j)=>`<button type="button" aria-label="Destaque ${j+1}" data-h="${j}"></button>`).join('')}</div></div></div>
@@ -431,6 +432,7 @@ function rInicio(){
  ${mine.length?shelf('Nos seus streamings','Sem pagar a mais',mine,''):''}
  ${wl.length?shelf('Minha lista','',wl,''):''}
  ${shelf('Em alta','Os mais procurados agora',pop,'')}
+ ${shelf('Chegaram esta semana','Novos no catálogo pelo radar: streamings, mais buscados e premiados',nv,'')}
  ${shelf('Top 10 Bom de Tela','A nota que junta público, crítica e prêmios',top,'top10')}
  ${shelf('Lançamentos 2024 a 2026','',recent,'',{y1:2024,y2:2026})}
  ${shelf('Colecionadores de Oscar','Três estatuetas ou mais',osc,'',{aw:'os3'})}
