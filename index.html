@@ -219,7 +219,7 @@ main{padding-bottom:calc(var(--tabh) + 30px + env(safe-area-inset-bottom,0px))}
 .reel::before,.reel::after{content:"";position:absolute;top:0;bottom:0;width:18%;z-index:2;pointer-events:none}
 .reel::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
 .reel::after{right:0;background:linear-gradient(-90deg,var(--bg),transparent)}
-.strip{position:absolute;top:16px;left:50%;display:flex;gap:12px;will-change:transform}
+.strip{position:absolute;top:16px;left:50%;display:flex;gap:12px}
 .strip .pst{width:160px;flex:none;opacity:.55;transition:opacity .4s,transform .4s}
 .strip .pst.win{opacity:1;transform:scale(1.06);box-shadow:0 0 0 3px var(--ac),0 20px 50px -10px rgba(255,200,61,.5)}
 .reel .frame{position:absolute;left:50%;top:8px;width:176px;height:256px;transform:translateX(-50%);border-radius:14px;border:2px dashed rgba(255,200,61,.35);z-index:1;pointer-events:none}
@@ -516,14 +516,18 @@ function rFilters(){const tg=(id,on,t,s)=>`<button class="tg" type="button" id="
 function updPot(){store.set('df',DF);const n=pot().length;$('#potn').textContent=n.toLocaleString('pt-BR');$('#drawbtn').disabled=!n;$('#drawbtn').style.opacity=n?1:.5;
  const o1=$('#o1');if(o1){o1.textContent=DF.y1;$('#o2').textContent=DF.y2}}
 function idleStrip(){const r=seeded(Date.now()/36e5|0),p=pot(),list=(p.length?p:F).slice().sort(()=>r()-.5).slice(0,9);
- const st=$('#strip');st.style.transition='none';st.innerHTML=list.map(f=>poster(f,{noScore:1})).join('');st.style.transform=`translateX(${-(4*172+80)}px)`}
+ const st=$('#strip');st.style.transition='none';st.innerHTML=list.map(f=>poster(f,{noScore:1})).join('');eagerCovers(st);st.style.transform=`translateX(${-(4*172+80)}px)`}
 let drawing=false,HIST=store.get('hist',[]);
+/* roleta girada por codigo (requestAnimationFrame): o iOS 26 derruba a pagina com animacoes/transicoes CSS */
+function eagerCovers(el){el.querySelectorAll('[data-cv]').forEach(x=>{x.dataset.o=1;x.style.backgroundImage=`url('${x.dataset.cv}')`})}
 function draw(){if(drawing)return;const p=pot();if(!p.length)return;drawing=true;$('#winner').innerHTML='';
- const win=p[Math.floor(Math.random()*p.length)],N=34,list=[];for(let j=0;j<N;j++)list.push(p[Math.floor(Math.random()*p.length)]);list[N-4]=win;
- const st=$('#strip');st.style.transition='none';st.innerHTML=list.map(f=>poster(f,{noScore:1})).join('');st.style.transform='translateX(-80px)';st.offsetWidth;
- const red=matchMedia('(prefers-reduced-motion: reduce)').matches;
- st.style.transition=red?'none':'transform 3.6s cubic-bezier(.12,.75,.16,1)';st.style.transform=`translateX(${-((N-4)*172+80)}px)`;
- setTimeout(()=>{st.children[N-4].classList.add('win');drawing=false;showWin(win);HIST=[win.id].concat(HIST.filter(x=>x!==win.id)).slice(0,12);store.set('hist',HIST);rHist()},red?50:3700)}
+ const win=p[Math.floor(Math.random()*p.length)],N=22,list=[];for(let j=0;j<N;j++)list.push(p[Math.floor(Math.random()*p.length)]);list[N-4]=win;
+ const st=$('#strip');st.style.transition='none';st.innerHTML=list.map(f=>poster(f,{noScore:1})).join('');eagerCovers(st);
+ const x0=-80,x1=-((N-4)*172+80),red=matchMedia('(prefers-reduced-motion: reduce)').matches,T=red?1:3200,t0=performance.now();
+ st.style.transform=`translateX(${x0}px)`;
+ const fim=()=>{st.style.transform=`translateX(${x1}px)`;st.children[N-4].classList.add('win');drawing=false;showWin(win);HIST=[win.id].concat(HIST.filter(x=>x!==win.id)).slice(0,12);store.set('hist',HIST);rHist()};
+ const passo=now=>{const k=Math.min(1,(now-t0)/T),e=1-Math.pow(1-k,4);st.style.transform=`translateX(${(x0+(x1-x0)*e).toFixed(1)}px)`;k<1?requestAnimationFrame(passo):fim()};
+ requestAnimationFrame(passo)}
 function showWin(f){const v=f._v||(f._v=verdict(f));
  $('#winner').innerHTML=`<div class="winner"><div class="kick">O sorteado é</div><h3>${esc(f.t)}</h3><div class="meta">${vchip(f)}<span class="num">${f.y}</span>${f.min?`<span>${hm(f.min)}</span>`:''}${f.cert?`<span class="cert c-${f.cert}">${f.cert}</span>`:''}<span>${f.gs.slice(0,3).map(g=>GPT[g]).join(' · ')}</span></div>
  <ul class="reasons">${v.R.slice(0,3).map(r=>`<li><i aria-hidden="true">${r[0]}</i><span>${esc(r[1])}</span></li>`).join('')}</ul>
