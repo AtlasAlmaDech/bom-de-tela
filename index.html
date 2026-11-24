@@ -10,7 +10,8 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Bom de Tela">
-<script>window.SOLO=1;try{history.replaceState(null,"",location.pathname+"?e=head"+location.hash)}catch(e){}</script>
+<script>window.SOLO=1;window.SEM=(new URLSearchParams(location.search).get("sem")||"");window.SEM.split(",").forEach(function(k){if(k)document.documentElement.classList.add("sem-"+k)});try{history.replaceState(null,"",location.pathname+"?"+(window.SEM?"sem="+window.SEM+"&":"")+"e=head"+location.hash)}catch(e){}</script>
+<style>.sem-blur *,.sem-blur *::before,.sem-blur *::after{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;filter:none!important}.sem-anim *,.sem-anim *::before,.sem-anim *::after{animation:none!important;transition:none!important}.sem-img .hero-bg,.sem-img .bgi,.sem-img .spr{background-image:none!important}</style>
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}</style>
 <title>Bom de Tela</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -337,7 +338,7 @@ main{padding-bottom:calc(var(--tabh) + 30px + env(safe-area-inset-bottom,0px))}
 
 <script>
 'use strict';
-const DG=(()=>{let L=[];const t0=Date.now();return e=>{try{history.replaceState(null,'',location.pathname+'?e='+encodeURIComponent(e.split(' ')[0])+location.hash)}catch(x){}try{L.push(e+' '+(Date.now()-t0)+'ms');localStorage.setItem('bdt-diag',JSON.stringify({ua:navigator.userAgent,quando:new Date().toLocaleString('pt-BR'),etapas:L}))}catch(x){}}})();DG('script');
+const DG=(()=>{let L=[];const t0=Date.now();return e=>{try{history.replaceState(null,'',location.pathname+'?'+(window.SEM?'sem='+window.SEM+'&':'')+'e='+encodeURIComponent(e.split(' ')[0])+location.hash)}catch(x){}try{L.push(e+' '+(Date.now()-t0)+'ms');localStorage.setItem('bdt-diag',JSON.stringify({ua:navigator.userAgent,quando:new Date().toLocaleString('pt-BR'),etapas:L}))}catch(x){}}})();DG('script');
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const norm=s=>String(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
