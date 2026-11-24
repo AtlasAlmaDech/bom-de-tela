@@ -79,7 +79,7 @@ nav.btabs a.dice{position:relative;top:-10px}
 nav.btabs a.dice .dbg{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(145deg,var(--warm),var(--hot));box-shadow:0 10px 24px -8px rgba(229,56,59,.7);color:#fff}
 nav.btabs a.dice svg{stroke:#fff;width:26px;height:26px}
 main{padding-bottom:calc(var(--tabh) + 30px + env(safe-area-inset-bottom,0px))}
-.view{display:none}.view.on{display:block;animation:vin .28s ease}
+.view{display:none}.view.on{display:block} /* sem animacao na tela inteira: estourava a memoria de video do iPhone (23/11) */
 @keyframes vin{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
 
 /* destaque */
@@ -592,7 +592,7 @@ addEventListener('hashchange',route);addEventListener('scroll',topSolid,{passive
  F=D.f.map((a,i)=>({i,id:'tt'+String(a[0]).padStart(7,'0'),t:a[1],o:a[2],y:a[3],min:a[4],gs:G.filter((g,k)=>a[5]&(1<<k)),r:a[6]/10,v:a[7],rt:a[8],mc:a[9],os:a[10],pa:a[11],sin:a[12],en:a[13],w:a[14]/1000,wv:a[15]||[],d:a[16]||[],c:a[17]||[],cert:a[18]||'',tl:a[19]||'',tr:a[20]||'',pop:a[21]||0,bd:!!a[22]}));
  F.forEach(f=>{byId.set(f.id,f);f._t=norm(f.t);f._s=norm(f.t+' '+f.o+' '+f.d.join(' ')+' '+f.c.join(' ')+' '+f.y)});
  DG('filmes ok');rInicio();DG('inicio');rChips();rFilters();DG('filtros');rAjustes();rHist();route();DG('telas');
- $('#splash').classList.add('out');DG('splash');requestAnimationFrame(()=>requestAnimationFrame(()=>DG('pintou')));setTimeout(()=>DG('estavel3s'),3000);setTimeout(()=>DG('estavel 10s'),10000);
+ $('#splash').classList.add('out');setTimeout(()=>{$('#splash').hidden=true},700);DG('splash');requestAnimationFrame(()=>requestAnimationFrame(()=>DG('pintou')));setTimeout(()=>DG('estavel3s'),3000);setTimeout(()=>DG('estavel 10s'),10000);
  /* modo sem internet desligado: o service worker derrubava o Chrome do iPhone (23/11). Remove o que ficou registrado. */
  try{navigator.serviceWorker&&navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister()));window.caches&&caches.keys().then(ks=>ks.forEach(k=>caches.delete(k)))}catch(e){}
 })();
