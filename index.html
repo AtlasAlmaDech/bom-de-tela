@@ -10,7 +10,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Bom de Tela">
-<script>window.SOLO=1;window.SEM=(new URLSearchParams(location.search).get("sem")||"");window.SEM.split(",").forEach(function(k){if(k)document.documentElement.classList.add("sem-"+k)});try{history.replaceState(null,"",location.pathname+"?"+(window.SEM?"sem="+window.SEM+"&":"")+"e=head"+location.hash)}catch(e){}</script>
+<script>window.SOLO=1;window.SEM=(new URLSearchParams(location.search).get("sem")||"");document.documentElement.classList.add("sem-anim");/* animacoes CSS derrubavam o iOS 26 (teste 23/11) */window.SEM.split(",").forEach(function(k){if(k)document.documentElement.classList.add("sem-"+k)});try{history.replaceState(null,"",location.pathname+"?"+(window.SEM?"sem="+window.SEM+"&":"")+"e=head"+location.hash)}catch(e){}</script>
 <style>.sem-blur *,.sem-blur *::before,.sem-blur *::after{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;filter:none!important}.sem-anim *,.sem-anim *::before,.sem-anim *::after{animation:none!important;transition:none!important}.sem-img .hero-bg,.sem-img .bgi,.sem-img .spr{background-image:none!important}</style>
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}</style>
 <title>Bom de Tela</title>
