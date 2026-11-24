@@ -592,7 +592,8 @@ addEventListener('hashchange',route);addEventListener('scroll',topSolid,{passive
  F.forEach(f=>{byId.set(f.id,f);f._t=norm(f.t);f._s=norm(f.t+' '+f.o+' '+f.d.join(' ')+' '+f.c.join(' ')+' '+f.y)});
  DG('filmes ok');rInicio();DG('inicio');rChips();rFilters();DG('filtros');rAjustes();rHist();route();DG('telas');
  $('#splash').classList.add('out');DG('splash');setTimeout(()=>DG('estavel 3s'),3000);setTimeout(()=>DG('estavel 10s'),10000);
- if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){try{navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}}
+ /* modo sem internet desligado: o service worker derrubava o Chrome do iPhone (23/11). Remove o que ficou registrado. */
+ try{navigator.serviceWorker&&navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister()));window.caches&&caches.keys().then(ks=>ks.forEach(k=>caches.delete(k)))}catch(e){}
 })();
 </script>
 
