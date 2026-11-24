@@ -337,6 +337,7 @@ main{padding-bottom:calc(var(--tabh) + 30px + env(safe-area-inset-bottom,0px))}
 
 <script>
 'use strict';
+const DG=(()=>{let L=[];const t0=Date.now();return e=>{try{L.push(e+' '+(Date.now()-t0)+'ms');localStorage.setItem('bdt-diag',JSON.stringify({ua:navigator.userAgent,quando:new Date().toLocaleString('pt-BR'),etapas:L}))}catch(x){}}})();DG('script');
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const norm=s=>String(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
@@ -585,12 +586,12 @@ addEventListener('hashchange',route);addEventListener('scroll',topSolid,{passive
 /* ---------- carregar ---------- */
 (async function(){
  try{$('#logo').src='icone-192.png'}catch(e){}
- try{const r=await fetch('dados.json');D=await r.json()}catch(e){$('#spmsg').textContent='Não consegui abrir o catálogo. Confira a conexão e abra de novo.';return}
- G=D.g;PV=D.pv;
+ DG('baixando');try{const r=await fetch('dados.json');D=await r.json()}catch(e){$('#spmsg').textContent='Não consegui abrir o catálogo. Confira a conexão e abra de novo.';return}
+ DG('dados ok');G=D.g;PV=D.pv;
  F=D.f.map((a,i)=>({i,id:'tt'+String(a[0]).padStart(7,'0'),t:a[1],o:a[2],y:a[3],min:a[4],gs:G.filter((g,k)=>a[5]&(1<<k)),r:a[6]/10,v:a[7],rt:a[8],mc:a[9],os:a[10],pa:a[11],sin:a[12],en:a[13],w:a[14]/1000,wv:a[15]||[],d:a[16]||[],c:a[17]||[],cert:a[18]||'',tl:a[19]||'',tr:a[20]||'',pop:a[21]||0,bd:!!a[22]}));
  F.forEach(f=>{byId.set(f.id,f);f._t=norm(f.t);f._s=norm(f.t+' '+f.o+' '+f.d.join(' ')+' '+f.c.join(' ')+' '+f.y)});
- rInicio();rChips();rFilters();rAjustes();rHist();route();
- $('#splash').classList.add('out');
+ DG('filmes ok');rInicio();DG('inicio');rChips();rFilters();DG('filtros');rAjustes();rHist();route();DG('telas');
+ $('#splash').classList.add('out');DG('splash');setTimeout(()=>DG('estavel 3s'),3000);setTimeout(()=>DG('estavel 10s'),10000);
  if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){try{navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}}
 })();
 </script>

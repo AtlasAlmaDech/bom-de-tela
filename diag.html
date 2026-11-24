@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bom de Tela · Diagnóstico</title>
+<style>
+body{margin:0;background:#0b0a0d;color:#f2ece4;font:16px/1.5 system-ui,sans-serif;padding:20px 16px}
+h1{font-size:22px;margin:0 0 12px;color:#FFC83D}
+pre{white-space:pre-wrap;word-break:break-word;background:#1a1720;border-radius:12px;padding:14px;font-size:14px}
+a,button{display:block;width:100%;box-sizing:border-box;text-align:center;margin:10px 0;padding:14px;border-radius:12px;border:0;font:600 16px system-ui;background:#FFC83D;color:#111;text-decoration:none}
+button.sec{background:#2a2530;color:#f2ece4}
+</style></head><body>
+<h1>Diagnóstico do Bom de Tela</h1>
+<p>Tire um print desta tela e mande para o Claude.</p>
+<pre id="o">carregando…</pre>
+<a href="./#inicio">1. Abrir o app de novo</a>
+<button class="sec" id="lp">2. Apagar dados guardados do app</button>
+<script>
+var o=document.getElementById('o'),d=null;
+try{d=JSON.parse(localStorage.getItem('bdt-diag')||'null')}catch(e){}
+o.textContent=(d?('Última abertura: '+d.quando+'\nEtapas: '+d.etapas.join(' → ')):'Nenhum registro: o app não chegou a rodar.')+
+ '\n\nAparelho: '+navigator.userAgent+'\nTela: '+screen.width+'x'+screen.height+' @'+devicePixelRatio+'x'+
+ '\nService worker: '+(('serviceWorker' in navigator)?'sim':'não');
+if('serviceWorker' in navigator)navigator.serviceWorker.getRegistrations().then(function(r){o.textContent+=' ('+r.length+' registrado)'});
+document.getElementById('lp').onclick=async function(){
+ try{for(const r of await navigator.serviceWorker.getRegistrations())await r.unregister()}catch(e){}
+ try{for(const k of await caches.keys())await caches.delete(k)}catch(e){}
+ this.textContent='Pronto. Agora toque em "Abrir o app de novo".'};
+</script></body></html>
