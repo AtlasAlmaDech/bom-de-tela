@@ -565,7 +565,7 @@ function go(v){cur=v;$$('.view').forEach(e=>e.classList.toggle('on',e.id==='v-'+
  if(v==='lista')rLista();if(v==='novidades')rNovidades();scrollTo(0,0);topSolid()}
 function rNovidades(){const N=(D&&D.nd)||{},idx=new Map();F.forEach(f=>{idx.set(norm(f.t),f);if(f.o)idx.set(norm(f.o),f)});
  const find=t=>{const k=norm(String(t).replace(/\s*\((série|serie)\)\s*$/i,''));return idx.get(k)||idx.get(norm(String(t).replace(/\s*\(.*\)\s*$/,'')))};
- const item=(x,right)=>{const f=find(x.t);const inner=`<span class="nd-d">${esc(x.d||'')}</span><span><span class="nd-t">${esc(x.t)}</span>${x.obs?`<span class="nd-o">${esc(x.obs)}</span>`:''}</span>${right?`<span class="nd-n">${esc(right)}</span>`:f?`<span class="nd-n">${vchip(f)}</span>`:''}`;
+ const item=(x,right)=>{const f=find(x.t);const inner=`${x.d?`<span class="nd-d">${esc(x.d)}</span>`:''}<span style="min-width:0"><span class="nd-t">${esc(x.t)}</span>${right?`<span class="nd-o" style="color:var(--ac)">${esc(right)}</span>`:''}${x.obs?`<span class="nd-o">${esc(x.obs)}</span>`:''}</span>${f?`<span class="nd-n">${vchip(f)}</span>`:''}`;
   return f?`<button type="button" class="nd-i" data-f="${f.i}">${inner}</button>`:`<div class="nd-i">${inner}</div>`};
  const nv=((D&&D.nv)||[]).map(x=>byId.get(x)).filter(Boolean),best=[...nv].sort(byW).slice(0,20);
  $('#ndw').innerHTML=`<div class="ph"><span class="nd-badge">NOVIDADES DA SEMANA</span><h1>${esc(N.titulo||'Novidades')}</h1><p>${esc(N.semana||'')}${N.upd?' · atualizado em '+esc(N.upd):''}</p></div>
