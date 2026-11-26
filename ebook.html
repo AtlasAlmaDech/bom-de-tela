@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>50 Filmes de Liderança</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+:root{color-scheme:dark;
+ --bg:#07060a;--bg1:#0e0c13;--bg2:#15121c;--bg3:#1e1a27;
+ --tx:#f4efe6;--mu:#aaa2b4;--fa:#6c6577;--ln:rgba(255,214,150,.13);
+ --gold:#FFC83D;--gold2:#c8901a;--red:#E5383B;--ok:#3ddc84;
+ --p1:#FFC83D;--p2:#ff6b5e;--p3:#36d2c0;--p4:#9d86ff;--p5:#e0577a;
+ --fd:"Lexend","Segoe UI",system-ui,sans-serif;--ft:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;--fm:"IBM Plex Mono",ui-monospace,Consolas,monospace;--fs:"Instrument Serif",Georgia,serif}
+*{box-sizing:border-box;margin:0;min-width:0}
+html,body{background:var(--bg);color:var(--tx)}
+body{font:15px/1.6 var(--ft);-webkit-font-smoothing:antialiased;
+ background:radial-gradient(60% 40% at 0% 0%,rgba(255,200,61,.10),transparent 70%),radial-gradient(50% 35% at 100% 30%,rgba(229,56,59,.08),transparent 70%),var(--bg);background-attachment:fixed}
+.pw{max-width:1080px;margin:0 auto;padding:16px max(16px,env(safe-area-inset-left)) 64px}
+h1,h2,h3{font-family:var(--fd);font-weight:500;letter-spacing:-.015em;text-wrap:balance}
+.k{font:600 11px/1.2 var(--ft);letter-spacing:.16em;text-transform:uppercase;color:var(--mu)}
+.mono{font-family:var(--fm);font-variant-numeric:tabular-nums}
+.g{position:relative;border-radius:24px;padding:22px;isolation:isolate;overflow:hidden;
+ background:linear-gradient(155deg,rgba(255,255,255,.075),rgba(255,255,255,.015) 42%,rgba(0,0,0,.25)),rgba(21,18,28,.82);
+ border:1px solid var(--ln);box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 28px 60px -28px rgba(0,0,0,.9)}
+.g::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(420px circle at var(--mx,15%) var(--my,-10%),rgba(255,200,61,.12),transparent 45%)}
+
+/* topo */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.brand{display:flex;align-items:center;gap:10px;font:500 15px var(--fd);letter-spacing:.04em}
+.brand i{width:28px;height:28px;border-radius:9px;background:radial-gradient(circle at 30% 25%,#fff3c4,var(--gold) 45%,#7a4a06);box-shadow:0 0 20px rgba(255,200,61,.55)}
+.brand b{color:var(--gold);font-weight:600}
+.pill{font:600 11px var(--ft);letter-spacing:.08em;padding:6px 11px;border-radius:99px;border:1px solid var(--ln);color:var(--mu);background:rgba(255,255,255,.03)}
+
+/* capa */
+.cover{min-height:min(88vh,720px);display:grid;align-content:end;padding:28px 24px;
+ background:radial-gradient(90% 70% at 85% 10%,rgba(255,200,61,.28),transparent 60%),radial-gradient(80% 60% at 0% 100%,rgba(229,56,59,.22),transparent 60%),linear-gradient(165deg,#1b1424,#09070d)}
+.cover canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1;opacity:.75;pointer-events:none}
+.strip{position:absolute;left:-10%;right:-10%;top:13%;height:74px;transform:rotate(-7deg);z-index:-1;opacity:.5;
+ background:repeating-linear-gradient(90deg,transparent 0 14px,rgba(0,0,0,.9) 14px 26px) top/100% 10px no-repeat,repeating-linear-gradient(90deg,transparent 0 14px,rgba(0,0,0,.9) 14px 26px) bottom/100% 10px no-repeat,
+ repeating-linear-gradient(90deg,rgba(255,200,61,.22) 0 110px,rgba(229,56,59,.18) 110px 112px,rgba(255,200,61,.10) 112px 222px,rgba(0,0,0,.5) 222px 224px);border-block:2px solid rgba(255,200,61,.25)}
+.cover .k{color:var(--gold)}
+.cover h1{font-family:var(--fs);font-weight:400;font-size:clamp(46px,11vw,104px);line-height:.92;letter-spacing:-.02em;margin:14px 0 14px}
+.cover h1 em{font-style:italic;background:linear-gradient(92deg,#fff2c6,var(--gold) 40%,#ff8a3d);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cover p.lead{font-size:clamp(16px,2.4vw,19px);color:#d9d1c6;max-width:560px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:24px}
+.kpi{border-radius:16px;padding:12px 14px;background:rgba(7,6,10,.55);border:1px solid var(--ln);backdrop-filter:blur(10px)}
+.kpi b{display:block;font:600 clamp(22px,4.5vw,30px)/1.1 var(--fm);color:var(--tx)}
+.kpi span{font-size:12px;color:var(--mu)}
+.byline{margin-top:18px;color:var(--fa);font-size:12.5px}
+
+/* grade */
+.row{display:grid;gap:14px;margin-top:14px}
+.c2{grid-template-columns:1.25fr 1fr}
+.sec-h{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:40px 0 14px}
+.sec-h h2{font-size:clamp(24px,4.5vw,34px)}
+.sec-h h2 em{font-family:var(--fs);font-style:italic;font-weight:400;color:var(--gold)}
+.g h3{font-size:18px;margin:6px 0 10px}
+.g p{color:#cfc7d6}
+.quote{font-family:var(--fs);font-size:clamp(22px,3.6vw,30px);line-height:1.2;color:var(--tx);margin:6px 0 12px}
+.quote em{color:var(--gold)}
+.note{margin-top:12px;padding:12px 14px;border-radius:14px;background:rgba(229,56,59,.09);border:1px solid rgba(229,56,59,.28);font-size:14px;color:#f1d8d6}
+
+/* sumário */
+.parts{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.pc{cursor:pointer;text-align:left;border:1px solid var(--ln);border-radius:18px;padding:14px;color:inherit;font:inherit;
+ background:linear-gradient(160deg,color-mix(in srgb,var(--c) 22%,transparent),rgba(255,255,255,.02) 60%),var(--bg2);display:grid;gap:8px;transition:transform .2s,border-color .2s}
+.pc:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--c) 60%,transparent)}
+.pc .n{font:600 30px/1 var(--fm);color:var(--c)}
+.pc b{font:500 15px/1.25 var(--fd)}
+.pc small{color:var(--mu);font-size:12px}
+.ring{--p:0;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font:600 11px var(--fm);color:var(--mu);
+ background:radial-gradient(closest-side,var(--bg2) 76%,transparent 78% 100%),conic-gradient(var(--c) calc(var(--p)*1%),rgba(255,255,255,.08) 0)}
+
+/* painel */
+.bars{display:flex;align-items:end;gap:8px;height:150px;margin-top:8px}
+.bar{flex:1;display:grid;justify-items:center;gap:6px;height:100%;align-content:end}
+.bar i{display:block;width:100%;max-width:46px;border-radius:9px 9px 4px 4px;background:linear-gradient(180deg,var(--gold),var(--gold2));box-shadow:0 0 18px -4px rgba(255,200,61,.6)}
+.bar b{font:600 12px var(--fm)}
+.bar span{font:500 11px var(--fm);color:var(--fa)}
+.meter{display:flex;align-items:center;gap:14px}
+.big{width:110px;height:110px;flex:none;border-radius:50%;display:grid;place-items:center;text-align:center;
+ background:radial-gradient(closest-side,#120f18 78%,transparent 80% 100%),conic-gradient(var(--gold) calc(var(--p,0)*1%),rgba(255,255,255,.08) 0)}
+.big b{font:600 26px/1 var(--fm);display:block}.big span{font-size:11px;color:var(--mu)}
+.steps{display:grid;gap:10px;counter-reset:s}
+.step{display:flex;gap:12px;align-items:flex-start}
+.step::before{counter-increment:s;content:counter(s);flex:none;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;font:600 13px var(--fm);color:#1a1206;background:var(--gold)}
+
+/* filtros */
+.tools{position:sticky;top:0;z-index:20;margin:0 -16px;padding:10px 16px;background:rgba(7,6,10,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--ln);display:grid;gap:8px}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.chip{flex:none;cursor:pointer;font:600 12.5px var(--ft);padding:7px 12px;border-radius:99px;border:1px solid var(--ln);background:rgba(255,255,255,.03);color:var(--mu)}
+.chip.on{color:#1a1206;background:var(--c,var(--gold));border-color:transparent}
+.srch{display:flex;align-items:center;gap:8px;height:42px;padding:0 12px;border-radius:12px;background:var(--bg2);border:1px solid var(--ln)}
+.srch input{flex:1;background:none;border:0;outline:0;color:var(--tx);font:15px var(--ft)}
+.srch svg{width:18px;height:18px;stroke:var(--mu);fill:none;stroke-width:2}
+
+/* partes e filmes */
+.part{margin-top:34px;scroll-margin-top:120px}
+.ph{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;padding:22px;
+ background:radial-gradient(90% 120% at 0% 0%,color-mix(in srgb,var(--c) 30%,transparent),transparent 60%),linear-gradient(160deg,#18141f,#0c0a10)}
+.ph .num{font:600 clamp(64px,14vw,110px)/.85 var(--fm);color:transparent;-webkit-text-stroke:1.5px var(--c);opacity:.9}
+.ph h2{font-size:clamp(24px,5vw,36px)}
+.ph p{color:var(--mu);margin-top:2px}
+.films{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
+.f{display:grid;gap:10px;padding:18px;border-radius:20px}
+.f .hd{display:flex;gap:12px;align-items:flex-start}
+.f .no{font:600 26px/1 var(--fm);color:var(--c);min-width:40px}
+.f h3{font-size:17px;margin:0;line-height:1.25}
+.f .yr{font:500 12px var(--fm);color:var(--fa);display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:4px}
+.badge{font:600 10px var(--ft);letter-spacing:.06em;padding:2px 7px;border-radius:6px;background:rgba(255,255,255,.06);color:var(--mu);border:1px solid var(--ln)}
+.f .les{color:#ddd5e3}
+.ask{border-radius:14px;padding:12px 14px;background:linear-gradient(135deg,color-mix(in srgb,var(--c) 16%,transparent),rgba(255,255,255,.02));border:1px solid color-mix(in srgb,var(--c) 35%,transparent)}
+.ask .k{color:var(--c);font-size:10px;margin-bottom:3px;display:block}
+.ask p{color:var(--tx);font-weight:500}
+.seen{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--mu);user-select:none;margin-left:auto;flex:none}
+.seen input{appearance:none;width:22px;height:22px;border-radius:7px;border:1.5px solid var(--ln);background:rgba(255,255,255,.03);display:grid;place-items:center;cursor:pointer}
+.seen input:checked{background:var(--ok);border-color:var(--ok)}
+.seen input:checked::after{content:"";width:6px;height:11px;border:solid #06210f;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.f.is-seen{opacity:.62}
+.empty{color:var(--mu);padding:20px;text-align:center}
+footer{margin-top:40px;color:var(--fa);font-size:12.5px;text-align:center}
+.foot-cta{text-align:center;padding:30px 22px}
+.foot-cta h2{font-family:var(--fs);font-weight:400;font-size:clamp(30px,6vw,46px)}
+.foot-cta h2 em{color:var(--gold)}
+
+@media (max-width:860px){.parts{grid-template-columns:repeat(2,1fr)}.parts .pc:last-child{grid-column:span 2}.c2{grid-template-columns:1fr}}
+@media (max-width:640px){.films{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}.g{padding:18px;border-radius:20px}.ph{padding:18px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{
+ @page{size:A4;margin:12mm}
+ body{background:#07060a;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ .tools,.seen{display:none!important}
+ .cover{min-height:260mm;break-after:page}
+ .part{break-before:page}.f{break-inside:avoid}
+ .g{box-shadow:none}
+}
+</style>
+</head>
+<body>
+<div class="pw">
+
+<div class="top"><div class="brand"><i></i>BOM DE <b>TELA</b></div><span class="pill">E-BOOK 1 · v2</span></div>
+
+<section class="g cover" id="capa">
+ <canvas id="fx" aria-hidden="true"></canvas><div class="strip" aria-hidden="true"></div>
+ <div class="k">Guia para assistir com o time</div>
+ <h1>50 filmes que ensinam <em>liderança</em> e <em>negócios</em></h1>
+ <p class="lead">A lição de cada filme em uma linha e uma pergunta para levar para a sua empresa.</p>
+ <div class="kpis">
+  <div class="kpi"><b>50</b><span>filmes escolhidos</span></div>
+  <div class="kpi"><b>5</b><span>partes temáticas</span></div>
+  <div class="kpi"><b id="kSpan">66</b><span>anos de cinema</span></div>
+  <div class="kpi"><b>50</b><span>perguntas para o time</span></div>
+ </div>
+ <p class="byline">bomdetela · 2026</p>
+</section>
+
+<div class="sec-h"><h2>Antes do <em>play</em></h2><span class="k">Abertura</span></div>
+<div class="row c2">
+ <div class="g">
+  <div class="k">Por que um filme ensina mais que uma palestra</div>
+  <p class="quote">Ninguém esquece uma <em>boa cena</em>.</p>
+  <p>Você pode esquecer o slide de uma palestra na semana seguinte, mas lembra por anos do jurado que muda de voto devagar, do comandante que precisa trazer três astronautas para casa com fita adesiva e papelão, do vendedor que só sabe fechar negócio sob ameaça. O cinema guarda lições de liderança dentro de histórias, e história é o formato que o cérebro mais retém.</p>
+  <p style="margin-top:10px">Este guia reúne 50 filmes em cinco partes. Para cada um, você encontra a lição em uma linha e uma pergunta para levar para a sua empresa. Dá para usar sozinho, num domingo, ou com o time: assista a um filme por mês e discuta a pergunta na reunião seguinte.</p>
+  <div class="note"><b>Regra do Bom de Tela:</b> nenhum filme aqui é perfeito, e alguns mostram justamente o que não fazer. Liderança também se aprende pelo contraexemplo.</div>
+ </div>
+ <div class="g">
+  <div class="k">Seu progresso</div>
+  <h3>Painel do leitor</h3>
+  <div class="meter"><div class="big" id="bigRing"><div><b id="seenN">0</b><span>de 50 vistos</span></div></div>
+   <p style="font-size:14px">Marque <b>Já vi</b> em cada filme. O painel guarda o progresso neste aparelho.</p></div>
+  <div class="k" style="margin-top:18px">Filmes por década</div>
+  <div class="bars" id="bars"></div>
+ </div>
+</div>
+
+<div class="sec-h"><h2>As cinco <em>partes</em></h2><span class="k">Sumário</span></div>
+<div class="parts" id="parts"></div>
+
+<div class="row c2" style="margin-top:14px">
+ <div class="g"><div class="k">Como usar este guia</div><h3>Um filme por mês</h3>
+  <p>Assista, anote a cena que mais marcou e leve a pergunta para a reunião seguinte. Em um ano, o time terá discutido 12 lições de gestão sem uma única palestra.</p></div>
+ <div class="g"><div class="k">Legenda</div><h3>O que significa o selo</h3>
+  <p><span class="badge">FORA DO CATÁLOGO</span> fora do catálogo atual do Bom de Tela: confira onde assistir.</p></div>
+</div>
+
+<div class="tools" id="tools">
+ <div class="chips" id="chips"></div>
+ <label class="srch"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="Buscar filme, lição ou pergunta" autocomplete="off"></label>
+</div>
+<div id="list"></div>
+
+<div class="sec-h"><h2>Sessão de cinema <em>com o time</em></h2><span class="k">Fecho · 90 min</span></div>
+<div class="row c2">
+ <div class="g"><div class="k">Roteiro de segunda a sexta</div><h3>Do trailer à ação</h3>
+  <div class="steps">
+   <div class="step"><p>Escolha 1 filme da lista e mande o trailer na segunda.</p></div>
+   <div class="step"><p>Assistam juntos ou cada um em casa até quinta.</p></div>
+   <div class="step"><p>Sexta, 30 min: cada um traz 1 cena e responde à pergunta do guia.</p></div>
+   <div class="step"><p>Feche com 1 ação prática para a semana seguinte.</p></div>
+  </div></div>
+ <div class="g"><div class="k">Dica do Bom de Tela</div><p class="quote">Comece pela <em>Parte 1</em>.</p>
+  <p>São os filmes mais fáceis de discutir em grupo e criam o hábito antes dos temas mais pesados.</p></div>
+</div>
+
+<div class="g foot-cta" style="margin-top:40px">
+ <div class="k">Bônus</div>
+ <h2>A lista <em>“já vi”</em> é este painel</h2>
+ <p style="max-width:520px;margin:8px auto 0">Cada filme marcado entra na contagem do painel do leitor. Para imprimir, use Ctrl+P → Salvar como PDF → A4, com “gráficos de fundo” ligado.</p>
+</div>
+
+<footer>Bom de Tela · E-book 1 · Diagramado v2 · 26/11/2026</footer>
+</div>
+
+<script>
+'use strict';
+const P=[
+ {n:1,t:'Liderar pessoas',s:'inspirar, formar time, dar exemplo',c:'var(--p1)'},
+ {n:2,t:'Decidir sob pressão',s:'crise, risco, a hora de agir',c:'var(--p2)'},
+ {n:3,t:'Empreender e vender',s:'ideia, produto, negociação, cliente',c:'var(--p3)'},
+ {n:4,t:'Inovar contra a corrente',s:'dados, tecnologia, pensar diferente',c:'var(--p4)'},
+ {n:5,t:'O lado sombrio do poder',s:'ambição, ética e o que não copiar',c:'var(--p5)'}];
+const F=[
+['12 Homens e uma Sentença',1957,'Um único jurado muda uma sala inteira só com perguntas e paciência. Liderar sem cargo.','Quando foi a última vez que você mudou uma decisão do time sem usar a sua autoridade?',1],
+['Invictus',2009,'Um presidente usa o esporte para unir um país dividido. Símbolo certo vale mais que discurso.','Qual é o símbolo que une a sua equipe?'],
+['Duelo de Titãs',2000,'Um técnico precisa juntar dois grupos que não se falam. Time se forma no convívio, não no organograma.','Onde o seu time ainda está dividido em “nós” e “eles”?'],
+['Desafio no Gelo',2004,'Um time de amadores vence os favoritos com disciplina e escolha de perfil, não de estrelas.','Você contrata o melhor currículo ou o melhor encaixe?'],
+['Coach Carter: Treino para a Vida',2005,'Exigir resultado fora da quadra para ganhar dentro dela. Regra clara gera respeito.','Qual regra da sua empresa ninguém cumpre e ninguém cobra?'],
+['Sociedade dos Poetas Mortos',1989,'Um professor que ensina a pensar, não a decorar. Inspirar é dar voz.','O seu time tem espaço para discordar de você?'],
+['Gandhi',1982,'Liderança pelo exemplo e pela coerência, mesmo quando custa caro.','O que você cobra do time que você mesmo não faz?'],
+['Coração Valente',1995,'Uma causa clara move pessoas mais longe que um salário.','O seu time sabe dizer, em uma frase, por que a empresa existe?'],
+['Um Sonho Possível',2009,'Talento existe em quem ninguém olhou; desenvolver gente é investimento.','Quem no seu time está sendo subestimado?'],
+['Um Senhor Estagiário',2015,'Experiência e juventude se completam quando há humildade dos dois lados.','Quem pode ser mentor de quem na sua equipe?',1],
+['Apollo 13 - Do Desastre ao Triunfo',1995,'“Trabalhe com o que você tem na mesa.” Gestão de crise com recursos limitados.','Se o caixa caísse pela metade amanhã, qual seria a sua mesa de recursos?'],
+['Sully: O Herói do Rio Hudson',2016,'208 segundos para decidir. Experiência vira intuição, e intuição precisa ser defendida com dados depois.','Você confia na sua intuição ou só no relatório?'],
+['13 Dias Que Abalaram o Mundo',2000,'Dar tempo ao adversário para recuar sem perder a cara. Negociação de alto risco.','Na sua última negociação, você deixou saída honrosa para o outro lado?'],
+['O Destino de uma Nação',2017,'Comunicação em crise: dizer a verdade e ainda assim dar esperança.','Como você comunica uma má notícia ao time?'],
+['Lincoln',2012,'Grandes objetivos exigem alianças pequenas e negociação paciente.','De quem você precisa do “sim” para o seu próximo grande passo?'],
+['O Resgate do Soldado Ryan',1998,'Liderar uma missão que o próprio time questiona.','O time entende o porquê da tarefa mais chata do mês?'],
+['Mestre dos Mares',2003,'Comando, hierarquia e cuidado com a tripulação longe de qualquer ajuda.','O seu time funciona quando você não está?'],
+['Margin Call: O Dia Antes do Fim',2011,'Uma noite para decidir entre salvar a empresa ou o mercado. Ética sob relógio.','Qual decisão rápida de hoje vai te custar a reputação amanhã?',1],
+['Grande Demais para Quebrar',2011,'Crise financeira vista de dentro: quem decide, com quais números, em quanto tempo.','Você tem um plano escrito para a pior semana do ano?',1],
+['Spotlight: Segredos Revelados',2015,'Um time pequeno, um método rigoroso e coragem para publicar.','O seu time tem método ou depende de heróis?'],
+['Fome de Poder',2016,'O processo vale mais que o produto, e contrato mal feito tira a empresa do fundador.','O seu processo poderia ser copiado em outra cidade amanhã?'],
+['A Rede Social',2010,'Velocidade, produto que vicia e sócios que viram inimigos.','O acordo com os seus sócios está escrito?'],
+['Air: A História Por Trás do Logo',2023,'Apostar tudo em um único cliente e mudar a regra do mercado na negociação.','Qual cliente valeria uma aposta grande?'],
+['Joy: O Nome do Sucesso',2015,'Da ideia na cozinha à TV: persistência, fornecedor e patente.','O que impede a sua melhor ideia de sair do papel esta semana?',1],
+['Jerry Maguire: A Grande Virada',1996,'Menos clientes, mais atenção. “Me ajude a te ajudar.”','Quais clientes merecem mais do seu tempo?'],
+['À Procura da Felicidade',2006,'Vender sem nada no bolso: preparo, persistência e postura.','Quantas ligações de venda você faz por dia?'],
+['O Sucesso a Qualquer Preço',1992,'Vendas sob pressão extrema. Ótimo para ver o que meta mal desenhada faz com as pessoas.','A sua meta premia o cliente certo ou qualquer cliente?'],
+['Tucker, um Homem e seu Sonho',1988,'Inovar contra gigantes: produto melhor não basta sem caixa e aliados.','Quem são os seus aliados contra os concorrentes grandes?'],
+['Tetris',2023,'Negociação internacional de direitos, contratos e confiança.','Você lê cada cláusula antes de assinar?'],
+['Erin Brockovich: Uma Mulher de Talento',2000,'Sem diploma, com método e persistência, ela muda o caso.','Qual trabalho “sem glamour” é o que realmente ganha a causa?'],
+['O Homem Que Mudou o Jogo',2011,'Dados vencem achismo, e o mercado resiste a quem prova isso.','Qual decisão da sua empresa ainda é tomada no achismo?'],
+['A Grande Aposta',2015,'Ler os números que ninguém lê e ter coragem de apostar contra o consenso.','Qual dado do seu setor todo mundo ignora?'],
+['Ford vs Ferrari',2019,'Inovação morre na burocracia; o time técnico precisa de proteção.','Quantas aprovações uma boa ideia precisa na sua empresa?'],
+['Estrelas Além do Tempo',2016,'Talento ignorado por preconceito; quem se antecipa à tecnologia nova sai na frente.','Quem no seu time já está aprendendo a ferramenta do futuro?'],
+['O Jogo da Imitação',2014,'Uma máquina para vencer um problema que gente sozinha não vence. A origem da automação.','Qual tarefa repetida da sua empresa uma IA já poderia fazer?'],
+['Steve Jobs',2015,'Visão de produto e o preço pessoal de liderar só pela visão.','Você explica o produto em uma frase?'],
+['O Aviador',2004,'Ousadia técnica e risco financeiro na mesma pessoa.','Qual risco você está correndo sem perceber?'],
+['BlackBerry',2023,'Do topo ao fim por não enxergar a mudança do mercado.','O que o seu cliente vai querer daqui a 2 anos?'],
+['Ratatouille',2007,'“Qualquer um pode cozinhar”: talento vem de onde menos se espera.','Você ouve ideias de quem está na ponta?'],
+['Kung Fu Panda',2008,'Não existe ingrediente secreto; existe acreditar no método e treinar.','Qual hábito diário faria mais diferença no seu negócio?'],
+['O Poderoso Chefão',1972,'Sucessão, lealdade e como o poder muda quem o recebe.','Quem assume se você parar amanhã?',1],
+['O Lobo de Wall Street',2013,'Técnica de vendas impressionante a serviço de uma fraude. O que não copiar.','O seu discurso de venda passaria numa auditoria?'],
+['Wall Street: Poder e Cobiça',1987,'“A ganância é boa” e o custo dessa ideia.','Onde termina a ambição saudável na sua empresa?'],
+['Sangue Negro',2007,'Ambição sem limite transforma o fundador no maior risco do negócio.','Quem tem coragem de te dizer “não” hoje?'],
+['Whiplash: Em Busca da Perfeição',2014,'Exigência extrema gera resultado e estraga pessoas. Onde fica o limite?','A sua cobrança forma ou queima talentos?'],
+['O Diabo Veste Prada',2006,'Padrão altíssimo de qualidade e a cultura que ele cria.','O seu time conhece o seu padrão de qualidade sem você precisar repetir?',1],
+['Amor Sem Escalas',2009,'Demitir pessoas como rotina; empatia não cabe em planilha.','Como a sua empresa desliga alguém?'],
+['A Lista de Schindler',1993,'Um empresário que usa a fábrica para salvar vidas. Negócio como escolha moral.','O que a sua empresa faz que vai além do lucro?'],
+['Como Enlouquecer Seu Chefe',1999,'Comédia sobre o escritório que desmotiva: relatório inútil, chefe ausente.','Qual relatório da sua empresa ninguém lê?'],
+['O Discurso do Rei',2010,'Fechamos com superação: um líder que precisa vencer a própria fraqueza para falar ao país.','Qual fraqueza sua o time já percebeu e você ainda não trabalhou?']
+].map((a,i)=>({i,n:i+1,t:a[0],y:a[1],l:a[2],q:a[3],out:!!a[4],p:Math.floor(i/10)+1}));
+
+const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const norm=s=>String(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+const pad=n=>String(n).padStart(2,'0');
+let SEEN={};try{SEEN=JSON.parse(localStorage.getItem('bdt-ebook1')||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem('bdt-ebook1',JSON.stringify(SEEN))}catch(e){}};
+let PF=0;
+
+function rParts(){$('#parts').innerHTML=P.map(p=>{const fs=F.filter(f=>f.p===p.n),s=fs.filter(f=>SEEN[f.n]).length;
+ return `<button class="pc" type="button" data-go="${p.n}" style="--c:${p.c}"><div style="display:flex;justify-content:space-between;align-items:center"><span class="n">${pad(p.n)}</span><span class="ring" style="--p:${s*10}">${s}/10</span></div><b>${esc(p.t)}</b><small>${esc(p.s)} · filmes ${pad(fs[0].n)}–${pad(fs[9].n)}</small></button>`}).join('')}
+function rChips(){$('#chips').innerHTML=`<button class="chip${PF?'':' on'}" type="button" data-pf="0">Todas</button>`+P.map(p=>`<button class="chip${PF===p.n?' on':''}" type="button" data-pf="${p.n}" style="--c:${p.c}">${p.n}. ${esc(p.t)}</button>`).join('')}
+function rStats(){const n=Object.values(SEEN).filter(Boolean).length;$('#seenN').textContent=n;$('#bigRing').style.setProperty('--p',n*2)}
+function rBars(){const d={};F.forEach(f=>{const k=Math.floor(f.y/10)*10;d[k]=(d[k]||0)+1});const ks=Object.keys(d).sort(),mx=Math.max(...Object.values(d));
+ $('#bars').innerHTML=ks.map(k=>`<div class="bar"><b>${d[k]}</b><i style="height:${Math.max(6,d[k]/mx*100)}%"></i><span>${String(k).slice(2)}s</span></div>`).join('');
+ const ys=F.map(f=>f.y);$('#kSpan').textContent=Math.max(...ys)-Math.min(...ys)}
+function card(f){const p=P[f.p-1];return `<article class="g f${SEEN[f.n]?' is-seen':''}" style="--c:${p.c}" data-n="${f.n}">
+ <div class="hd"><span class="no">${pad(f.n)}</span><div style="flex:1"><h3>${esc(f.t)}</h3><div class="yr"><span>${f.y}</span>${f.out?'<span class="badge">FORA DO CATÁLOGO</span>':''}</div></div>
+ <label class="seen"><input type="checkbox" data-seen="${f.n}"${SEEN[f.n]?' checked':''}>Já vi</label></div>
+ <p class="les">${esc(f.l)}</p>
+ <div class="ask"><span class="k">Para o seu negócio</span><p>${esc(f.q)}</p></div></article>`}
+function rList(){const q=norm($('#q').value.trim());let html='';
+ P.forEach(p=>{if(PF&&PF!==p.n)return;let fs=F.filter(f=>f.p===p.n);if(q)fs=fs.filter(f=>norm(f.t+' '+f.l+' '+f.q+' '+f.y).includes(q));if(!fs.length)return;
+  html+=`<section class="part" id="parte-${p.n}" style="--c:${p.c}"><div class="g ph"><span class="num">${p.n}</span><div><div class="k">Parte ${p.n} · filmes ${pad((p.n-1)*10+1)}–${pad(p.n*10)}</div><h2>${esc(p.t)}</h2><p>${esc(p.s)}</p></div></div><div class="films">${fs.map(card).join('')}</div></section>`});
+ $('#list').innerHTML=html||'<p class="empty">Nenhum filme encontrado.</p>'}
+function all(){rParts();rChips();rStats();rList()}
+
+document.addEventListener('click',e=>{const t=e.target;
+ const go=t.closest('[data-go]');if(go){PF=0;$('#q').value='';rChips();rList();const el=document.getElementById('parte-'+go.dataset.go);if(el)el.scrollIntoView({behavior:'smooth'});return}
+ const pf=t.closest('[data-pf]');if(pf){PF=+pf.dataset.pf;rChips();rList();$('#tools').scrollIntoView({behavior:'smooth'});return}});
+document.addEventListener('change',e=>{const c=e.target.closest('[data-seen]');if(!c)return;SEEN[c.dataset.seen]=c.checked?1:0;save();c.closest('.f').classList.toggle('is-seen',c.checked);rParts();rStats()});
+$('#q').addEventListener('input',rList);
+document.addEventListener('pointermove',e=>{const g=e.target.closest&&e.target.closest('.g');if(!g)return;const r=g.getBoundingClientRect();g.style.setProperty('--mx',(e.clientX-r.left)+'px');g.style.setProperty('--my',(e.clientY-r.top)+'px')},{passive:true});
+rBars();all();
+
+/* poeira de projetor na capa (leve; para quando a capa sai da tela) */
+(function(){const cv=$('#fx'),cx=cv.getContext&&cv.getContext('2d');if(!cx||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ let W,H,pts=[],vis=true,raf=0;const dpr=Math.min(2,devicePixelRatio||1);
+ function size(){const r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0);
+  pts=Array.from({length:Math.round(W*H/9000)},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.6+.3,v:Math.random()*.25+.05,a:Math.random()*.6+.2}))}
+ function tick(){cx.clearRect(0,0,W,H);const g=cx.createRadialGradient(W*.85,H*.1,0,W*.85,H*.1,Math.max(W,H)*.9);g.addColorStop(0,'rgba(255,214,120,.10)');g.addColorStop(1,'rgba(0,0,0,0)');cx.fillStyle=g;cx.fillRect(0,0,W,H);
+  for(const p of pts){p.y-=p.v;p.x+=Math.sin((p.y+p.r*50)/60)*.15;if(p.y<-4){p.y=H+4;p.x=Math.random()*W}cx.globalAlpha=p.a;cx.fillStyle='#ffe2a0';cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.283);cx.fill()}
+  cx.globalAlpha=1;if(vis)raf=requestAnimationFrame(tick)}
+ size();addEventListener('resize',size);tick();
+ if('IntersectionObserver'in window)new IntersectionObserver(es=>{vis=es[0].isIntersecting;cancelAnimationFrame(raf);if(vis)tick()}).observe(cv);
+})();
+</script>
+</body>
+</html>
