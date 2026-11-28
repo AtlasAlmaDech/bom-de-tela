@@ -721,7 +721,7 @@ function intro(){
 /* ---------- carregar ---------- */
 (async function(){
  try{$('#logo').src='icone-192.png'}catch(e){}
- try{intro()}catch(e){}DG('baixando');try{const r=await fetch('dados.json');D=await r.json()}catch(e){$('#spmsg').textContent='Não consegui abrir o catálogo. Confira a conexão e abra de novo.';return}
+ try{intro()}catch(e){}DG('baixando');try{const r=await fetch('dados.json',{cache:'no-cache'});D=await r.json()}catch(e){$('#spmsg').textContent='Não consegui abrir o catálogo. Confira a conexão e abra de novo.';return}
  DG('dados ok');G=D.g;PV=D.pv;
  F=D.f.map((a,i)=>({i,id:'tt'+String(a[0]).padStart(7,'0'),t:a[1],o:a[2],y:a[3],min:a[4],gs:G.filter((g,k)=>a[5]&(1<<k)),r:a[6]/10,v:a[7],rt:a[8],mc:a[9],os:a[10],pa:a[11],sin:a[12],en:a[13],w:a[14]/1000,wv:a[15]||[],d:a[16]||[],c:a[17]||[],cert:a[18]||'',tl:a[19]||'',tr:a[20]||'',pop:a[21]||0,bd:!!a[22]}));
  FLM=new Map((D.fl||[]).map(x=>[x[0],x]));
